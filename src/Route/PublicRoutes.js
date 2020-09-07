@@ -2,7 +2,7 @@ import Portfoliohomepage from '../Pages/Homepage.js';
 import ImageCards from '../Components/Core/Portfolio/Portfoliohome2.js';
 import Patients from '../Components/Core/Patients/Patientdivision.js';
 import Model from '../Components/Addpatients.js'
-import RegisterForm from '../Pages/Signup.js'
+// import RegisterForm from '../Pages/Signup.js'
 const publicRoutes = [
 	{
 		path: '/',
@@ -24,11 +24,11 @@ const publicRoutes = [
 		component: Model,
 		exact: true
 	},
-	{
-		path: '/Signup',
-		component: RegisterForm,
-		exact: true
-	}
+	// {
+	// 	path: '/Signup',
+	// 	component: RegisterForm,
+	// 	exact: true
+	// }
 ];
 
 export default publicRoutes;
