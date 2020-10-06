@@ -1,186 +1,158 @@
+import React, { Component } from 'react';
+import { withStyles } from '@material-ui/styles';
+import TextField from '@material-ui/core/TextField';
 
-import React from 'react';
-import fields from 'react'
+import ButtonAppBar from '../Components/Core/Home/Appbar.js'
+import { Typography } from '@material-ui/core';
+import SignupForm from '../Components/Core/Forms/SignupForm.js';
+import fire from '../config/fire.js'
+import Button from '@material-ui/core/Button';
 
 const styles = (theme) => ({
-  #register, #login :{
-  width: '300px';
-  border: '1px solid #d6d7da';
-  padding: '0px 15px 15px 15px';
-  border-radius: '5px';
-  font-family: 'arial';
-  line-height: '16px';
-  color: '#333333';
-  font-size: '14px';
-  background: '#ffffff';
-  margin: '100px auto';
-}
+  head: {
+    textAlign: 'center',
+    font: ' Bold 35px/45px PT Sans',
+    letterSpacing: '0',
+    color: '#008080',
+    opacity: '1',
+    [theme.breakpoints.down('sm')]: {
+      font: ' Bold 24px/32px PT Sans',
+    },
+  },
+  para: {
+    maxWidth: '458px',
+    minHeight: '54px',
 
-form label, form input :{
-  display: 'block';
-  //margin-bottom: 10px;
-  width: '90%'
-}
-
-form input :{
-  padding: '10px';
-  border: 'solid 1px #BDC7D8';
-
-}
-
-.button :{
-  background-color:'#00BFFF';
-  border-color: '#3ac162';
-  font-weight: 'bold';
-  padding: '12px 15px';
-  color: #ffffff;
-}
-
-.errorMsg :{
-  color: #cc0000;
-  margin-bottom: '12px';
-}
-
-.sucessMsg :{
-  color: '#6B8E23';
-  margin-bottom: '10px';
-}
+    textAlign: ' center',
+    font: '400 17px/27px PT Sans',
+    letterSpacing: '0.6px',
+    color: '#181D337A',
+    opacity: '1',
+  },
+  input: {
+    minHeight: '30px',
+    width: 'auto',
+    border: '2px solid black',
+    borderRadius: '4px'
+  },
+  loginform: {
+    minHeight: '300px',
+    width: '500px',
+    border: '2px solid black',
+    borderRadius: '4px',
+    margin: 'auto'
+  },
+  inputfield: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '300px',
+    justifyContent: 'center',
+    margin: 'auto',
+  }
 });
 
-export default class RegisterForm extends React.Component {
-    constructor() {
-      super();
-      this.state = {
-        fields: {},
-        errors: {}
-      }
 
-      this.handleChange = this.handleChange.bind(this);
-      this.submituserRegistrationForm = this.submituserRegistrationForm.bind(this);
+
+class SignupForms extends Component {
+  constructor(props) {
+    super(props);
+    this.login = this.login.bind(this);
+    this.signup = this.signup.bind(this);
+
+    this.handleChange = this.handleChange.bind(this);
+
+    this.state = {
+
+      email: '',
+      password: '',
+      firstname: '',
+      lastname: ''
 
     };
-
-    handleChange(e) {
-      let fields = this.state.fields;
-      fields[e.target.name] = e.target.value;
-      this.setState({
-        fields
-      });
-    
-
-    }
-
-    submituserRegistrationForm(e) {
-      console.log(this.validateForm());
-      
-      e.preventDefault();
-      if (this.validateForm()) {
-          console.log(this.state);
-          // let fields = {};
-          // fields["username"] = "";
-          // fields["emailid"] = "";
-          // fields["mobileno"] = "";
-          // fields["password"] = "";
-          this.setState({fields:fields});
-          console.log(this.state);
-          alert("Form submitted");
-      }
-
-    }
-
-    validateForm() {
-
-      let fields = this.state.fields;
-      let errors = {};
-      let formIsValid = true;
-
-      if (!fields["username"]) {
-        formIsValid = false;
-        errors["username"] = "*Please enter your username.";
-      }
-
-      if (typeof fields["username"] !== "undefined") {
-        if (!fields["username"].match(/^[a-zA-Z ]*$/)) {
-          formIsValid = false;
-          errors["username"] = "*Please enter alphabet characters only.";
-        }
-      }
-
-      if (!fields["emailid"]) {
-        formIsValid = false;
-        errors["emailid"] = "*Please enter your email-ID.";
-      }
-
-      if (typeof fields["emailid"] !== "undefined") {
-        //regular expression for email validation
-        var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-        if (!pattern.test(fields["emailid"])) {
-          formIsValid = false;
-          errors["emailid"] = "*Please enter valid email-ID.";
-        }
-      }
-
-      if (!fields["mobileno"]) {
-        formIsValid = false;
-        errors["mobileno"] = "*Please enter your mobile no.";
-      }
-
-      if (typeof fields["mobileno"] !== "undefined") {
-        if (!fields["mobileno"].match(/^[0-9]{10}$/)) {
-          formIsValid = false;
-          errors["mobileno"] = "*Please enter valid mobile no.";
-        }
-      }
-
-      if (!fields["password"]) {
-        formIsValid = false;
-        errors["password"] = "*Please enter your password.";
-      }
-
-      if (typeof fields["password"] !== "undefined") {
-        if (!fields["password"].match(/^.*(?=.{8,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%&]).*$/)) {
-          formIsValid = false;
-          errors["password"] = "*Please enter secure and strong password.";
-        }
-      }
-
-      this.setState({
-        errors: errors
-      });
-      return formIsValid;
-
-
-    }
-
-
-
-  render() {
-    return (
-    <div id="main-registration-container">
-     <div id="register">
-        <h3>Registration page</h3>
-        <form method="post"  name="userRegistrationForm"  onSubmit= {this.submituserRegistrationForm} >
-        <label>Name</label>
-        <input type="text" name="username" value={this.state.fields.username} onChange={this.handleChange} />
-        <div className="errorMsg">{this.state.errors.username}</div>
-        <label>Email ID:</label>
-        <input type="text" name="emailid" value={this.state.fields.emailid} onChange={this.handleChange}  />
-        <div className="errorMsg">{this.state.errors.emailid}</div>
-        <label>Mobile No:</label>
-        <input type="text" name="mobileno" value={this.state.fields.mobileno} onChange={this.handleChange}   />
-        <div className="errorMsg">{this.state.errors.mobileno}</div>
-        <label>Password</label>
-        <input type="password" name="password" value={this.state.fields.password} onChange={this.handleChange} />
-        <div className="errorMsg">{this.state.errors.password}</div>
-        <input type="submit" className="button"  value="Register"/>
-        </form>
-    </div>
-</div>
-
-      );
   }
 
 
+  login(e) {
+    e.preventDefault();
+    fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
+      console.log(u)
+    }).catch((err) =>
+      console.log(err)
+    )
+  }
+
+  signup(e) {
+    e.preventDefault();
+    fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
+      console.log(u)
+    }).catch((err) =>
+      console.log(err)
+    )
+  }
+
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <div className={classes.loginform}>
+
+        <form>
+          <Typography className={classes.head}>Signup</Typography>
+          <Typography className={classes.para}>
+            Fusce placerat pretium mauris, vel sollicitudin elit lacinia vitae.
+            Quisque sit amet nisi erat.
+          </Typography>
+          <div className={classes.inputfield}>
+      
+
+            <TextField
+
+              type="text"
+
+              id="outlined-required"
+
+
+              variant="outlined"
+              name="email"
+
+              onChange={this.handleChange}
+              value={this.state.email}
+              label="E mail"
+
+            />
+            <br></br>
+            <TextField
+
+              type="password"
+
+              id="outlined-required"
+
+
+              variant="outlined"
+              name="password"
+              onChange={this.handleChange}
+              value={this.state.password}
+              label="Password"
+              defaultValue="tharshi@gmail.com"
+
+            />
+
+            <br></br>
+
+            <Button onClick={this.signup} variant="contained" color="primary">Signup</Button>
+            <br></br>
+            <Button onClick={this.login} variant="contained" color="primary">Login</Button>
+          </div>
+        </form>
+      </div>
+    );
+  }
 }
 
-
+export default withStyles(styles)(SignupForms);

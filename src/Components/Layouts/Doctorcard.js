@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import  ContainedButtons from '../../Components/Core/Button.js'
 
 const useStyles = makeStyles((theme) => ({
   image: {
@@ -23,12 +24,6 @@ const useStyles = makeStyles((theme) => ({
     padding: "26px",
     width:'100%'
   },
-  ChipLabel: {
-    color: '#4DB6AC',
-  },
-  ChipRoot: {
-    backgroundColor: '#4DB6AC1F',
-  },
   text: {
     width: '264px',
     height: '69px',
@@ -38,17 +33,10 @@ const useStyles = makeStyles((theme) => ({
     opacity: '1',
     marginTop:'6px'
   },
-title: {
+  title: {
     textAlign: 'center',
     color: '#201F1F',
     opacity: '1',
-  },
-  text2:{
-height: '23px',
-textAlign: 'center',
-color: '#FF2222',
-textTransform: 'uppercase',
-opacity: '1',
   },
   description:{
     width: '264px',
@@ -61,7 +49,7 @@ height: '133px',
 
 const DoctorCard = (props) => {
   const classes = useStyles(props);
-  const { image, title, text, text2 } = props.data;
+  const { image, title, text} = props.data;
   return (
     <div className={classes.main}>
       <div>
@@ -76,10 +64,8 @@ const DoctorCard = (props) => {
         {text}
       </Typography>
       </div>
-      <Typography className={classes.text2} variant="subtitle1" href="/patients">
-        {text2}
-      </Typography>
-      </div>
+   <ContainedButtons button='View patients' href='/patients'></ContainedButtons>
+   </div>
     </div>
   );
 };

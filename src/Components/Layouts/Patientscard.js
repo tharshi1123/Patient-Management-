@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import SimplePopover from '../../Components/Core/Popupform.js'
+import  ContainedButtons from '../../Components/Core/Button.js'
 
 const useStyles = makeStyles((theme) => ({
   image: {
@@ -25,14 +24,8 @@ const useStyles = makeStyles((theme) => ({
     padding: "26px",
     width:'100%'
   },
-  ChipLabel: {
-    color: '#4DB6AC',
-  },
   button: {
     margin: theme.spacing(1),
-  },
-  ChipRoot: {
-    backgroundColor: '#4DB6AC1F',
   },
   text: {
     textAlign: 'center',
@@ -48,13 +41,16 @@ title: {
     opacity: '1',
   },
   text2:{
-height: '23px',
-textAlign: 'center',
-color: '#FF2222',
-textTransform: 'uppercase',
-opacity: '1',
+   height: '23px',
+   textAlign: 'center',
+   color: '#FF2222',
+   textTransform: 'uppercase',
+   opacity: '1',
   },
-  
+  buttonset:{
+display:'flex',
+flexDirection:'row'
+  },
   description:{
 [theme.breakpoints.down('sm')]: {
  margin:'0'
@@ -64,12 +60,11 @@ opacity: '1',
 
 const PatientCard = (props) => {
   const classes = useStyles(props);
-  const { image, title, pressure, heartbeat,bedno,oxygen,respiration,temperature,button,button1} = props.data;
-  return (
-    
-    <div className={classes.main}>
+  const { image, title, pressure, heartbeat,bedno,oxygen,respiration,temperature} = props.data;
 
-      <div>
+  return (
+    <div className={classes.main}>
+     <div>
       <img src={image} alt="logo" className={classes.image} />
       </div>
       <div>
@@ -96,23 +91,12 @@ const PatientCard = (props) => {
       <Typography className={classes.text} variant="subtitle1">
        Heart Beat: {heartbeat}
       </Typography>
-      <Button
-        variant="contained"
-        color="secondary"
-        href="/model"
-        className={classes.button}
+<div className={classes.buttonset}>   
+      <ContainedButtons button='set' href='/model'></ContainedButtons>
+      <ContainedButtons button='remove' href='/model'></ContainedButtons>
+</div>
+  
 
-      >
-        {button} 
-      </Button>
-      <Button
-        variant="contained"
-        href="/model"
-        color="secondary"
-        className={classes.button}
-      >
-        {button1} 
-      </Button>
       </div>
     </div>
   );

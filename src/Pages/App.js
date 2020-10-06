@@ -1,6 +1,6 @@
 import React from 'react';
 import publicRoute from '../Route/PublicRoutes';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import {   Link,Route, BrowserRouter, Switch } from 'react-router-dom';
 
 const App = ()=> {
   const publicRoutes = (Routes, index) => {
@@ -10,6 +10,7 @@ const App = ()=> {
         path={Routes.path}
         component={Routes.component}
         exact={Routes.exact}
+       
       />
     );
   };

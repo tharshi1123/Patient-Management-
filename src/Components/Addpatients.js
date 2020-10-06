@@ -1,4 +1,5 @@
 import React from 'react';
+import  ContainedButtons from '../Components/Core/Button.js'
 
 const display = {
   display: 'block'
@@ -32,13 +33,13 @@ export default class Modal extends React.Component {
   </label>
 </form>
       <div className="modal-footer">
-        <a className="btn-flat" onClick={this.toggle}>Submit</a>
+               <ContainedButtons button='submit'onClick={this.toggle}></ContainedButtons>
       </div>
     </div>
     );
     return (
       <div>
-        <a className="btn" onClick={this.toggle}>{this.state.toggle ? 'Close modal' : 'Open modal'}</a>
+        <button className="btn" onClick={this.toggle}>{this.state.toggle ? 'Close modal' : 'Open modal'}</button>
         {modal}
       </div>
     );

@@ -9,39 +9,21 @@ const useStyles = makeStyles((theme) => ({
   },
   Text: {
     textAlign:'center',
-    height: '18px',
     letterSpacing: '1.82px',
     color: '#FF2222',
     textTransform: 'uppercase',
-    opacity: '1',
-    margin:'6px'
+     font: 'Bold 32px/47px Poppins',
   },
-  Text2:{
-    textAlign:'center',
-    height: '49px',
-    letterSpacing: '0px',
-    color: '#383B47',
-    opacity: '1',
-    font: 'Bold 32px/47px Poppins',
-    [theme.breakpoints.down("sm")]: {
-      font: "Bold 11px/26px Poppins",
-    },
-    margin:'10px'
-
-  }
 }));
 
 function HeadingAndSub(props) {
   const classes = useStyles(props);
-  const { text, text2 } = props;
+  const { text } = props;
 
   return (
     <div className={classes.Head} >
       <Typography className={classes.Text} variant="h6">
         {text}
-      </Typography>
-      <Typography className={classes.Text2} variant="h6">
-        {text2}
       </Typography>
     </div>
   );
